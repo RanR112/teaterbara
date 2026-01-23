@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import styles from "./VideoIntro.module.scss";
-import introVideo from '../../assets/videos/intro.mp4';
+import introVideo from '../../assets/videos/intro.webm';
 
 interface VideoIntroProps {
     onVideoEnd: () => void;
@@ -27,7 +27,7 @@ const VideoIntro: React.FC<VideoIntroProps> = ({ onVideoEnd }) => {
                     onEnded={onVideoEnd}
                     playsInline
                 >
-                    <source src={introVideo} type="video/mp4" />
+                    <source src={introVideo} type="video/webm" />
                 </video>
             </div>
         </div>
