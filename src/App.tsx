@@ -3,8 +3,9 @@ import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 import ReadyScreen from "./components/ReadyScreen/ReadyScreen";
 import VideoIntro from "./components/VideoIntro/VideoIntro";
 import Navbar from "./components/Navbar/Navbar";
-import MainContent from "./components/MainContent/MainContent";
+import MainContent from "./pages/MainContent/MainContent";
 import "./App.css";
+import Footer from "./components/Footer/Footer";
 
 const App: React.FC = () => {
     const [stage, setStage] = useState<"loading" | "ready" | "video" | "main">(
@@ -12,10 +13,9 @@ const App: React.FC = () => {
     );
 
     useEffect(() => {
-        // Simulasi loading - dalam implementasi nyata, tunggu video dimuat
         const timer = setTimeout(() => {
             setStage("ready");
-        }, 2000);
+        }, 3900);
 
         return () => clearTimeout(timer);
     }, []);
@@ -44,6 +44,7 @@ const App: React.FC = () => {
                 <>
                     <Navbar />
                     <MainContent />
+                    <Footer />
                 </>
             )}
         </div>
