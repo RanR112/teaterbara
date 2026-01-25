@@ -1,0 +1,289 @@
+.contact {
+  padding: 120px 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 3;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 80px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.visible .sectionHeader {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sectionTitle {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+.sectionTitle span {
+  background: linear-gradient(135deg, #fff 0%, #666 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.titleUnderline {
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+  margin: 0 auto 20px;
+  opacity: 0;
+  transform: scaleX(0);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+.visible .titleUnderline {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.sectionSubtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #888;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contactContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.contactInfo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+.visible .contactInfo {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.infoCard {
+  padding: 35px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+}
+.infoCard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+.infoCard:hover .iconWrapper {
+  transform: scale(1.1) rotate(5deg);
+}
+.infoCard h3 {
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  color: #fff;
+  margin: 20px 0 15px;
+  font-weight: 700;
+}
+.infoCard p {
+  font-size: clamp(0.95rem, 2vw, 1rem);
+  color: #aaa;
+  line-height: 1.8;
+  margin: 5px 0;
+}
+.infoCard p:hover {
+  color: #fff;
+}
+
+.iconWrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.socialLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+.socialLinks a {
+  color: #aaa;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 8px;
+}
+.socialLinks a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(5px);
+}
+
+.mapContainer {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+}
+.visible .mapContainer {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mapPlaceholder {
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.mapPlaceholder::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.03) 50%, transparent 70%);
+  -webkit-animation: shine 4s infinite;
+          animation: shine 4s infinite;
+}
+.mapPlaceholder p {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  color: #888;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.mapIcon {
+  width: 40%;
+  height: 40%;
+  position: relative;
+  z-index: 1;
+  -webkit-animation: float 6s ease-in-out infinite;
+          animation: float 6s ease-in-out infinite;
+}
+
+@-webkit-keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+@-webkit-keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+@media (max-width: 1024px) {
+  .contactContent {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .contactInfo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mapContainer {
+    transform: translateX(0);
+  }
+  .visible .mapContainer {
+    transform: translateX(0);
+  }
+}
+@media (max-width: 768px) {
+  .contact {
+    padding: 80px 0;
+  }
+  .container {
+    padding: 0 20px;
+  }
+  .sectionHeader {
+    margin-bottom: 50px;
+  }
+  .contactContent {
+    gap: 40px;
+  }
+  .contactInfo {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    transform: translateX(0);
+  }
+  .visible .contactInfo {
+    transform: translateX(0);
+  }
+  .infoCard {
+    padding: 25px;
+  }
+  .iconWrapper {
+    width: 60px;
+    height: 60px;
+  }
+}
+@media (max-width: 480px) {
+  .infoCard {
+    padding: 20px;
+  }
+  .iconWrapper {
+    width: 50px;
+    height: 50px;
+  }
+  .iconWrapper svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+/*# sourceMappingURL=ContactSection.module.css.map */

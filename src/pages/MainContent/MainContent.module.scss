@@ -1,0 +1,28 @@
+.mainContent {
+    width: 100%;
+    overflow-x: hidden;
+    background: #000;
+}
+
+.mainBackground {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 11px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.section {
+    opacity: 2;
+    transform: translateY(50px);
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
