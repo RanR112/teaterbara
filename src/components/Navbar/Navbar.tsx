@@ -1,75 +1,79 @@
-import React, { useState, useEffect } from "react";
-import Logo from "../../assets/logo.png";
+import React from "react";
 import styles from "./Navbar.module.scss";
+import Logo from "../../assets/images/logo.png";
+
+import { useNavbar } from "../../hooks/useNavbar";
+import NavLinks from "./NavLinks";
+import MobileMenu from "./MobileMenu";
 
 const Navbar: React.FC = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
-
-    const closeMenu = () => {
-        setIsMenuOpen(false);
-    };
+    const {
+        isMenuOpen,
+        scrolled,
+        activeItem,
+        navItems,
+        toggleMenu,
+        closeMenu,
+    } = useNavbar();
 
     return (
-        <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
-            <div className={styles.logoContainer}>
-                <img src={Logo} alt="Logo" className={styles.navbarLogo} />
-                <span className={styles.brandName}>Teater Bara</span>
-            </div>
-
-            <ul
-                className={`${styles.navLinks} ${isMenuOpen ? styles.active : ""}`}
+        <>
+            {/* Desktop Navbar */}
+            <nav
+                className={`${styles.navbar} ${
+                    scrolled ? styles.scrolled : ""
+                }`}
             >
-                <li>
-                    <a href="#home" onClick={closeMenu}>
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a href="#about" onClick={closeMenu}>
-                        About
-                    </a>
-                </li>
-                <li>
-                    <a href="#gallery" onClick={closeMenu}>
-                        Gallery
-                    </a>
-                </li>
-                <li>
-                    <a href="#achievements" onClick={closeMenu}>
-                        Achievements
-                    </a>
-                </li>
-                <li>
-                    <a href="#contact" onClick={closeMenu}>
-                        Contact
-                    </a>
-                </li>
-            </ul>
+                <div className={styles.navContainer}>
+                    {/* Logo */}
+                    <div className={styles.logoContainer}>
+                        <div className={styles.logoWrapper}>
+                            <img
+                                src={Logo}
+                                alt="Teater Bara Logo"
+                                className={styles.navbarLogo}
+                            />
+                            <div className={styles.logoGlow} />
+                        </div>
 
+                        <div className={styles.brandInfo}>
+                            <span className={styles.brandName}>
+                                Teater Bara
+                            </span>
+                            <span className={styles.brandTagline}>
+                                Passion in Performance
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* Desktop Navigation */}
+                    <NavLinks items={navItems} activeItem={activeItem} />
+                </div>
+            </nav>
+
+            {/* Mobile Toggle Button */}
             <button
-                className={`${styles.menuToggle} ${isMenuOpen ? styles.active : ""}`}
+                className={`${styles.menuToggle} ${
+                    isMenuOpen ? styles.active : ""
+                }`}
                 onClick={toggleMenu}
                 aria-label="Toggle menu"
+                aria-expanded={isMenuOpen}
             >
-                <span></span>
-                <span></span>
-                <span></span>
+                <span />
+                <span />
+                <span />
             </button>
-        </nav>
+
+            {/* Mobile Menu */}
+            <MobileMenu
+                open={isMenuOpen}
+                items={navItems}
+                activeItem={activeItem}
+                onClose={closeMenu}
+                logo={Logo}
+            />
+        </>
     );
 };
 

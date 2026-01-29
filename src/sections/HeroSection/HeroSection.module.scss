@@ -1,0 +1,322 @@
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 3;
+}
+
+.heroVideoOverlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    video {
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: cover;
+    }
+}
+
+.heroBackgroundOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 2;
+}
+
+.heroContent {
+    position: relative;
+    text-align: center;
+    max-width: 1200px;
+    padding: 0 40px;
+    transform: translateY(30px);
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 3;
+}
+
+.heroTitle {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    animation: titleReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s backwards;
+}
+
+.highlight {
+    background: linear-gradient(135deg, #fff 0%, #888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    display: inline-block;
+    animation: shimmer 3s ease-in-out infinite;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, #fff, transparent);
+        animation: lineExpand 1.5s ease-out 0.8s backwards;
+    }
+}
+
+.heroSubtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: #ebebeb;
+    margin-bottom: 30px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: subtitleReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.6s backwards;
+}
+
+.heroDescription {
+    max-width: 700px;
+    margin: 0 auto 40px;
+
+    p {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        font-weight: 300;
+        color: #ededed;
+        line-height: 1.8;
+        animation: descReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.9s backwards;
+    }
+}
+
+.heroButtons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: btnReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1.2s backwards;
+}
+
+.btnPrimary,
+.btnSecondary {
+    padding: 16px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition:
+            width 0.6s,
+            height 0.6s;
+    }
+
+    &:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    span {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+.btnPrimary {
+    background: #fff;
+    color: #000;
+    border: 2px solid #fff;
+
+    &::before {
+        background: #000;
+    }
+
+    &:hover {
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+    }
+}
+
+.btnSecondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+
+    &::before {
+        background: #fff;
+    }
+
+    &:hover {
+        color: #000;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+    }
+}
+
+// Animations
+@keyframes pulseBackground {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes titleReveal {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes lineExpand {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 100px;
+        opacity: 1;
+    }
+}
+
+@keyframes subtitleReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes descReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes btnReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(16px);
+        opacity: 0;
+    }
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .hero {
+        min-height: 100vh;
+    }
+
+    .heroContent {
+        padding: 0 20px;
+        margin-top: 4rem;
+    }
+
+    .heroButtons {
+        margin: auto;
+        align-items: center;
+        flex-direction: column;
+        gap: 15px;
+
+        a {
+            width: 100%;
+            max-width: 300px;
+        }
+    }
+
+    .scrollIndicator {
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btnPrimary,
+    .btnSecondary {
+        padding: 14px 30px;
+        font-size: 14px;
+    }
+}
