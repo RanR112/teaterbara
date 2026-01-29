@@ -1,10 +1,10 @@
-# 🎭 Website Teater Bara
+# Website Teater Bara
 
 Website **Teater Bara** adalah website profil dan galeri yang dibangun menggunakan **React + TypeScript** dengan **SCSS Module**. Website ini menampilkan identitas kelompok teater, dokumentasi kegiatan, serta pengalaman visual modern melalui animasi, video intro, dan sistem section observer.
 
 ---
 
-## 🚀 Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
 * **React** (Vite / CRA)
 * **TypeScript**
@@ -13,7 +13,7 @@ Website **Teater Bara** adalah website profil dan galeri yang dibangun menggunak
 
 ---
 
-## 🎥 Alur Tampilan Halaman
+## Alur Tampilan Halaman
 
 1. **VideoIntro**
 
@@ -68,4 +68,4 @@ npm run preview
 
 ---
 
-> 🎭 "Teater bukan sekadar panggung, tapi ruang hidup gagasan."
+> "Teater bukan sekadar panggung, tapi ruang hidup gagasan."
