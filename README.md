@@ -1,73 +1,71 @@
-# React + TypeScript + Vite
+# 🎭 Website Teater Bara
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website **Teater Bara** adalah website profil dan galeri yang dibangun menggunakan **React + TypeScript** dengan **SCSS Module**. Website ini menampilkan identitas kelompok teater, dokumentasi kegiatan, serta pengalaman visual modern melalui animasi, video intro, dan sistem section observer.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Teknologi yang Digunakan
 
-## React Compiler
+* **React** (Vite / CRA)
+* **TypeScript**
+* **SCSS Module**
+* **Intersection Observer API**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🎥 Alur Tampilan Halaman
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **VideoIntro**
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+   * Ditampilkan pertama kali saat website dibuka
+   * Setelah selesai, konten utama akan muncul
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2. **Hero Section**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+   * Baru muncul setelah VideoIntro selesai
+   * Terintegrasi dengan `useSectionObserver`
+
+3. **Section Lainnya**
+
+   * About
+   * Gallery
+   * Achievement
+   * Footer
+
+---
+
+## useSectionObserver
+
+Hook ini digunakan untuk:
+
+* Mendeteksi section yang sedang terlihat di viewport
+* Mengatur animasi masuk section
+* Mengontrol highlight navbar
+
+### Contoh penggunaan:
+
+```tsx
+const { ref, isVisible } = useSectionObserver();
+
+<section ref={ref} className={isVisible ? styles.show : styles.hidden}>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Cara Menjalankan Project
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
+
+Atau jika production build:
+
+```bash
+npm run build
+npm run preview
+```
+
+---
+
+> 🎭 "Teater bukan sekadar panggung, tapi ruang hidup gagasan."
