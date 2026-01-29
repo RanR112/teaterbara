@@ -125,6 +125,7 @@
         font-size: 14px;
         line-height: 1.8;
         margin-bottom: 15px;
+        display: flex;
 
         span {
             margin-right: 8px;
@@ -144,9 +145,13 @@
     flex-wrap: wrap;
     gap: 20px;
 
-    p {
+    a {
         color: #666;
         font-size: 14px;
+
+        &:hover {
+            color: #888;
+        }
     }
 }
 
@@ -155,7 +160,7 @@
     align-items: center;
     gap: 15px;
 
-    a {
+    p {
         color: #666;
         text-decoration: none;
         font-size: 14px;

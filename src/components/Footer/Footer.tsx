@@ -1,6 +1,8 @@
 import React from "react";
-import Logo from "../../assets/images/logo.png"
+import Logo from "../../assets/images/logo.png";
 import styles from "./Footer.module.scss";
+import { APP_CONFIG } from "../../configs/app.config";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
@@ -12,7 +14,11 @@ const Footer: React.FC = () => {
                     <div className={styles.footerGrid}>
                         <div className={styles.footerBrand}>
                             <div className={styles.logoSection}>
-                                <img src={Logo} alt="Logo" className={styles.footerLogo} />
+                                <img
+                                    src={Logo}
+                                    alt="Logo"
+                                    className={styles.footerLogo}
+                                />
                                 <h3>Teater Bara</h3>
                             </div>
                             <p className={styles.brandDescription}>
@@ -21,7 +27,10 @@ const Footer: React.FC = () => {
                                 menginspirasi.
                             </p>
                             <div className={styles.socialIcons}>
-                                <a href="#" aria-label="Instagram">
+                                <a
+                                    href={APP_CONFIG.social.instagram.link}
+                                    aria-label="Instagram"
+                                >
                                     <svg
                                         width="20"
                                         height="20"
@@ -57,7 +66,10 @@ const Footer: React.FC = () => {
                                         />
                                     </svg>
                                 </a>
-                                <a href="#" aria-label="Facebook">
+                                <a
+                                    href={APP_CONFIG.social.tiktok.link}
+                                    aria-label="Tiktok"
+                                >
                                     <svg
                                         width="20"
                                         height="20"
@@ -65,31 +77,19 @@ const Footer: React.FC = () => {
                                         fill="none"
                                         stroke="currentColor"
                                     >
+                                        {" "}
                                         <path
-                                            d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
+                                            d="M16 2c1.3 2.5 3.5 4 6 4v4c-2.6 0-4.9-.8-6-2v6.5a6.5 6.5 0 1 1-5.5-6.4v4.2a2.5 2.5 0 1 0 1.5 2.3V2h4z"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />{" "}
                                     </svg>
                                 </a>
-                                <a href="#" aria-label="Twitter">
-                                    <svg
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                </a>
-                                <a href="#" aria-label="YouTube">
+                                <a
+                                    href={APP_CONFIG.social.youtube.link}
+                                    aria-label="YouTube"
+                                >
                                     <svg
                                         width="20"
                                         height="20"
@@ -141,12 +141,6 @@ const Footer: React.FC = () => {
                                 <li>
                                     <a href="#contact">Hubungi Kami</a>
                                 </li>
-                                <li>
-                                    <a href="#">Jadwal Latihan</a>
-                                </li>
-                                <li>
-                                    <a href="#">Bergabung</a>
-                                </li>
                             </ul>
                         </div>
 
@@ -154,15 +148,22 @@ const Footer: React.FC = () => {
                             <h4>Kontak</h4>
                             <ul>
                                 <li>
-                                    <span>📍</span> Gedung Kesenian Jakarta
-                                    <br />
-                                    Jl. Seni Teater No. 123
+                                    <span>
+                                        <MapPin />
+                                    </span>{" "}
+                                    {APP_CONFIG.address}
                                 </li>
                                 <li>
-                                    <span>📧</span> info@teaterbara.id
+                                    <span>
+                                        <Mail />
+                                    </span>{" "}
+                                    {APP_CONFIG.email}
                                 </li>
                                 <li>
-                                    <span>📞</span> +62 812-3456-7890
+                                    <span>
+                                        <Phone />
+                                    </span>{" "}
+                                    {APP_CONFIG.cp}
                                 </li>
                             </ul>
                         </div>
@@ -173,14 +174,12 @@ const Footer: React.FC = () => {
             <div className={styles.footerBottom}>
                 <div className={styles.container}>
                     <div className={styles.bottomContent}>
-                        <p>
+                        <a href="https://randyrafael.my.id" target="_blank">
                             &copy; {currentYear} Teater Bara. All rights
                             reserved.
-                        </p>
+                        </a>
                         <div className={styles.footerBottomLinks}>
-                            <a href="#">Privacy Policy</a>
-                            <span>•</span>
-                            <a href="#">Terms of Service</a>
+                            <p>"Teater bukan sekadar panggung, tapi ruang hidup gagasan."</p>
                         </div>
                     </div>
                 </div>

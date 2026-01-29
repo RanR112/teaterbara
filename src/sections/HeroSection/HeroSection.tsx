@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./HeroSection.module.scss";
-import introVideo from "../../assets/videos/intro.webm";
 import { useSectionObserver } from "../../hooks/useSectionObserver";
+import { hero } from "../../assets/index.assets";
 
 const HeroSection: React.FC = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -19,7 +19,7 @@ const HeroSection: React.FC = () => {
         >
             <div className={styles.heroVideoOverlay}>
                 <video ref={videoRef} muted loop playsInline>
-                    <source src={introVideo} type="video/webm" />
+                    <source src={hero} type="video/mp4" />
                 </video>
             </div>
 
@@ -37,9 +37,10 @@ const HeroSection: React.FC = () => {
 
                 <div className={styles.heroDescription}>
                     <p>
-                        Teater Bara adalah wadah ekspresi seni teater yang
-                        berkomitmen untuk menghadirkan pertunjukan berkualitas
-                        dan bermakna bagi masyarakat.
+                        Teater Bara adalah wadah ekspresi seni teater di
+                        Banjarnegara yang berkomitmen untuk menghadirkan karya
+                        pertunjukan yang presisi dan setiap ekspresi disucikan
+                        menjadi pertunjukan yang sarat makna.
                     </p>
                 </div>
 

@@ -25,7 +25,7 @@ const MainContent: React.FC = () => {
                 <AboutSection />
                 <GallerySection />
                 <AchievementSection />
-                <TeamSection />
+                {/* <TeamSection /> */}
                 <ContactSection />
             </div>
         </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ContactSection.module.scss";
 import { useSectionObserver } from "../../hooks/useSectionObserver";
+import { APP_CONFIG } from "../../configs/app.config";
 
 const ContactSection: React.FC = () => {
     const { ref, isVisible } = useSectionObserver({ threshold: 0.2 });
@@ -48,9 +49,7 @@ const ContactSection: React.FC = () => {
                                 </svg>
                             </div>
                             <h3>Lokasi</h3>
-                            <p>Dekranasda Kabupaten Banjarnegara</p>
-                            <p>JL. Jend. A Yani No.16</p>
-                            <p>Krandegan, Banjarnegara, Jawa Tengah</p>
+                            <p>{APP_CONFIG.address}</p>
                         </div>
 
                         <div className={styles.infoCard}>
@@ -77,8 +76,7 @@ const ContactSection: React.FC = () => {
                                 </svg>
                             </div>
                             <h3>Email</h3>
-                            <p>info@teaterbara.id</p>
-                            <p>kolaborasi@teaterbara.id</p>
+                            <p>{APP_CONFIG.email}</p>
                         </div>
 
                         <div className={styles.infoCard}>
@@ -99,8 +97,7 @@ const ContactSection: React.FC = () => {
                                 </svg>
                             </div>
                             <h3>Telepon</h3>
-                            <p>+62 812-3456-7890</p>
-                            <p>+62 821-9876-5432</p>
+                            <p>{APP_CONFIG.cp}</p>
                         </div>
 
                         <div className={styles.infoCard}>
@@ -133,13 +130,13 @@ const ContactSection: React.FC = () => {
                             </div>
                             <h3>Media Sosial</h3>
                             <div className={styles.socialLinks}>
-                                <a href="#" aria-label="Instagram">
+                                <a href={APP_CONFIG.social.instagram.link} aria-label="Instagram" target="_blank">
                                     Instagram
                                 </a>
-                                <a href="#" aria-label="Facebook">
-                                    Facebook
+                                <a href={APP_CONFIG.social.tiktok.link} aria-label="Tiktok" target="_blank">
+                                    Tiktok
                                 </a>
-                                <a href="#" aria-label="YouTube">
+                                <a href={APP_CONFIG.social.youtube.link} aria-label="YouTube" target="_blank">
                                     YouTube
                                 </a>
                             </div>
@@ -149,7 +146,7 @@ const ContactSection: React.FC = () => {
                     <div className={styles.mapContainer}>
                         <iframe
                             className={styles.mapPlaceholder}
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.9834215270673!2d109.69686256829412!3d-7.397052710611417!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aa91695290a03%3A0x8c6fa7e422669993!2sDekranasda%20Kabupaten%20Banjarnegara!5e0!3m2!1sid!2sid!4v1769344190303!5m2!1sid!2sid"
+                            src={APP_CONFIG.gmaps}
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
                         ></iframe>
