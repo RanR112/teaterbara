@@ -1,19 +1,22 @@
 import React from "react";
+import { motion } from "framer-motion";
 import styles from "./TeamSection.module.scss";
-import { useSectionObserver } from "../../hooks/useSectionObserver";
 import { TEAM_MEMBER } from "../../configs/team.config";
+import { staggerContainer, fadeUp } from "../../animations/variants";
 
 const TeamSection: React.FC = () => {
-    const { ref, isVisible } = useSectionObserver({ threshold: 0.2 });
-
     return (
-        <section
-            className={`${styles.team} ${isVisible ? styles.visible : ""}`}
+        <motion.section
+            className={styles.team}
             id="team"
-            ref={ref}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
         >
             <div className={styles.container}>
-                <div className={styles.sectionHeader}>
+                {/* ===== Header ===== */}
+                <motion.div className={styles.sectionHeader} variants={fadeUp}>
                     <h2 className={styles.sectionTitle}>
                         TIM <span>KAMI</span>
                     </h2>
@@ -21,14 +24,18 @@ const TeamSection: React.FC = () => {
                     <p className={styles.sectionSubtitle}>
                         Jiwa-jiwa kreatif di balik setiap pertunjukan
                     </p>
-                </div>
+                </motion.div>
 
-                <div className={styles.teamGrid}>
-                    {TEAM_MEMBER.map((member, index) => (
-                        <div
+                {/* ===== Grid ===== */}
+                <motion.div
+                    className={styles.teamGrid}
+                    variants={staggerContainer}
+                >
+                    {TEAM_MEMBER.map((member) => (
+                        <motion.div
                             key={member.id}
                             className={styles.memberCard}
-                            style={{ animationDelay: `${index * 0.15}s` }}
+                            variants={fadeUp}
                         >
                             <div className={styles.cardInner}>
                                 <div className={styles.cardFront}>
@@ -55,11 +62,11 @@ const TeamSection: React.FC = () => {
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 

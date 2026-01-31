@@ -60,8 +60,6 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-
-    animation: titleReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s backwards;
 }
 
 .highlight {
@@ -71,7 +69,6 @@
     background-clip: text;
     position: relative;
     display: inline-block;
-    animation: shimmer 3s ease-in-out infinite;
 
     &::after {
         content: "";
@@ -82,7 +79,6 @@
         width: 100px;
         height: 4px;
         background: linear-gradient(90deg, transparent, #fff, transparent);
-        animation: lineExpand 1.5s ease-out 0.8s backwards;
     }
 }
 
@@ -93,7 +89,6 @@
     font-weight: 400;
     letter-spacing: 2px;
     text-transform: uppercase;
-    animation: subtitleReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.6s backwards;
 }
 
 .heroDescription {
@@ -105,7 +100,6 @@
         font-weight: 300;
         color: #ededed;
         line-height: 1.8;
-        animation: descReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.9s backwards;
     }
 }
 
@@ -114,7 +108,6 @@
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    animation: btnReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1.2s backwards;
 }
 
 .btnPrimary,
@@ -184,104 +177,6 @@
         color: #000;
         transform: translateY(-3px);
         box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
-    }
-}
-
-// Animations
-@keyframes pulseBackground {
-    0%,
-    100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.8;
-    }
-}
-
-@keyframes titleReveal {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes shimmer {
-    0%,
-    100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-}
-
-@keyframes lineExpand {
-    from {
-        width: 0;
-        opacity: 0;
-    }
-    to {
-        width: 100px;
-        opacity: 1;
-    }
-}
-
-@keyframes subtitleReveal {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes descReveal {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes btnReveal {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translate(-50%, 20px);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, 0);
-    }
-}
-
-@keyframes scroll {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(16px);
-        opacity: 0;
     }
 }
 

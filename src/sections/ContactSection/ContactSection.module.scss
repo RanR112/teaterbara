@@ -16,14 +16,7 @@
 .sectionHeader {
     text-align: center;
     margin-bottom: 80px;
-    opacity: 0;
-    transform: translateY(30px);
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-
-    .visible & {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .sectionTitle {
@@ -46,14 +39,7 @@
     height: 4px;
     background: linear-gradient(90deg, transparent, #fff, transparent);
     margin: 0 auto 20px;
-    opacity: 0;
-    transform: scaleX(0);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
-
-    .visible & {
-        opacity: 1;
-        transform: scaleX(1);
-    }
 }
 
 .sectionSubtitle {
@@ -74,14 +60,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
-    opacity: 0;
-    transform: translateX(-50px);
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
-
-    .visible & {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }
 
 .infoCard {
@@ -157,14 +136,7 @@
 }
 
 .mapContainer {
-    opacity: 0;
-    transform: translateX(50px);
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
-
-    .visible & {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }
 
 .mapPlaceholder {
@@ -241,10 +213,6 @@
 
     .mapContainer {
         transform: translateX(0);
-
-        .visible & {
-            transform: translateX(0);
-        }
     }
 }
 
@@ -269,10 +237,6 @@
         grid-template-columns: 1fr;
         gap: 20px;
         transform: translateX(0);
-
-        .visible & {
-            transform: translateX(0);
-        }
     }
 
     .infoCard {

@@ -27,14 +27,7 @@
 .sectionHeader {
     text-align: center;
     margin-bottom: 80px;
-    opacity: 0;
-    transform: translateY(30px);
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-
-    .visible & {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .sectionTitle {
@@ -57,32 +50,75 @@
     height: 4px;
     background: linear-gradient(90deg, transparent, #fff, transparent);
     margin: 0 auto;
-    opacity: 0;
-    transform: scaleX(0);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
-
-    .visible & {
-        opacity: 1;
-        transform: scaleX(1);
-    }
 }
 
-.aboutContent {
+.aboutWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.subtitleSection {
+    text-align: center;
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
+.aboutSubtitle {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    color: #fff;
+    font-weight: 700;
+    line-height: 1.3;
+    max-width: 800px;
+    margin: 0 auto 20px;
+    text-align: left;
+}
+
+// Content Blocks
+.contentBlock {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 80px;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
     align-items: center;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Staggered animation
+    &:nth-child(2) {
+        transition-delay: 0.2s;
+    }
+
+    &:nth-child(3) {
+        transition-delay: 0.4s;
+    }
+
+    &:nth-child(4) {
+        transition-delay: 0.6s;
+    }
+
+    &:nth-child(5) {
+        transition-delay: 0.8s;
+    }
+
+    // Reverse layout untuk variasi
+    &.reverse {
+        .imageContainer {
+            order: 2;
+        }
+
+        .textContainer {
+            order: 1;
+        }
+    }
 }
 
-.aboutImage {
-    opacity: 0;
-    transform: translateX(-50px);
+.imageContainer {
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: clamp(200px, 90vw, 400px);
+    height: auto;
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
-
-    .visible & {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }
 
 .imageWrapper {
@@ -92,6 +128,13 @@
     overflow: hidden;
     background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
     border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+
+    &:hover {
+        transform: translateY(-10px);
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
 
     &::before {
         content: "";
@@ -124,43 +167,30 @@
     }
 }
 
-.theatreIcon {
-    width: 60%;
-    height: 60%;
-    opacity: 0.3;
-    animation: rotate 30s linear infinite;
-}
-
 .imageOverlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+    z-index: 1;
 }
 
-.aboutText {
-    opacity: 0;
-    transform: translateX(50px);
+.textContainer {
+    transform: translateX(30px);
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
 
-    .visible & {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+    .reverse & {
+        transform: translateX(-30px);
 
-.aboutSubtitle {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    color: #fff;
-    margin-bottom: 25px;
-    font-weight: 600;
-    line-height: 1.3;
+        .visible & {
+            transform: translateX(0);
+        }
+    }
 }
 
 .aboutParagraph {
     font-size: clamp(1rem, 2vw, 1.1rem);
     color: #aaa;
     line-height: 1.8;
-    margin-bottom: 20px;
     text-align: justify;
 
     strong {
@@ -173,7 +203,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    margin: 40px 0;
+    margin-bottom: 40px;
 }
 
 .statCard {
@@ -206,7 +236,6 @@
 }
 
 .mission {
-    margin-top: 40px;
     padding: 30px;
     background: rgba(255, 255, 255, 0.02);
     border-left: 4px solid #fff;
@@ -268,19 +297,10 @@
     }
 }
 
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-// Responsive
+// Responsive Design
 @media (max-width: 1024px) {
-    .aboutContent {
-        gap: 60px;
+    .contentBlock {
+        gap: 40px;
     }
 }
 
@@ -297,17 +317,35 @@
         margin-bottom: 50px;
     }
 
-    .aboutContent {
-        grid-template-columns: 1fr;
+    .aboutSubtitle {
+        text-align: center;
+    }
+
+    .aboutWrapper {
         gap: 40px;
     }
 
-    .aboutImage,
-    .aboutText {
-        transform: translateX(0);
+    .contentBlock {
+        grid-template-columns: 1fr;
+        gap: 30px;
+
+        &.reverse {
+            .imageContainer {
+                order: 1;
+            }
+
+            .textContainer {
+                order: 2;
+            }
+        }
+    }
+
+    .imageContainer,
+    .textContainer {
+        transform: translateX(0) !important;
 
         .visible & {
-            transform: translateX(0);
+            transform: translateX(0) !important;
         }
     }
 
@@ -326,6 +364,26 @@
 }
 
 @media (max-width: 480px) {
+    .about {
+        padding: 60px 0;
+    }
+
+    .sectionHeader {
+        margin-bottom: 40px;
+    }
+
+    .aboutWrapper {
+        gap: 30px;
+    }
+
+    .contentBlock {
+        gap: 25px;
+    }
+
+    .imageWrapper {
+        aspect-ratio: 3/4;
+    }
+
     .statsGrid {
         grid-template-columns: 1fr;
         gap: 15px;
@@ -333,5 +391,18 @@
 
     .statCard {
         padding: 25px 20px;
+    }
+
+    .mission {
+        padding: 20px 15px;
+
+        ul li {
+            padding: 10px 0;
+            padding-left: 25px;
+
+            &:hover {
+                padding-left: 30px;
+            }
+        }
     }
 }

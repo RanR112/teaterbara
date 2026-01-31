@@ -1,56 +1,62 @@
 import React from "react";
+import { motion } from "framer-motion";
 import styles from "./AchievementSection.module.scss";
-import { useSectionObserver } from "../../hooks/useSectionObserver";
 import { ACHIEVEMENT_ITEMS } from "../../configs/achievement.config";
+import { staggerContainer, fadeUp } from "../../animations/variants";
 
 const AchievementSection: React.FC = () => {
-    const { ref, isVisible } = useSectionObserver({ threshold: 0.2 });
-
     return (
-        <section
-            className={`${styles.achievement} ${isVisible ? styles.visible : ""}`}
+        <motion.section
+            className={styles.achievement}
             id="achievements"
-            ref={ref}
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible" // ← langsung visible, no observer
         >
             <div className={styles.container}>
-                <div className={styles.sectionHeader}>
+                <motion.div className={styles.sectionHeader} variants={fadeUp}>
                     <h2 className={styles.sectionTitle}>
                         PENCAPAIAN <span>KAMI</span>
                     </h2>
-                    <div className={styles.titleUnderline}></div>
+                    <div className={styles.titleUnderline} />
                     <p className={styles.sectionSubtitle}>
                         Perjalanan prestasi dan dedikasi dalam berkarya
                     </p>
-                </div>
+                </motion.div>
 
-                <div className={styles.timeline}>
-                    {ACHIEVEMENT_ITEMS.map((achievement, index) => (
-                        <div
+                <motion.div
+                    className={styles.timeline}
+                    variants={staggerContainer}
+                >
+                    {ACHIEVEMENT_ITEMS.map((achievement) => (
+                        <motion.div
                             key={achievement.id}
                             className={styles.timelineItem}
-                            style={{ animationDelay: `${index * 0.15}s` }}
+                            variants={fadeUp}
                         >
                             <div className={styles.timelineMarker}>
-                                <div className={styles.markerDot}></div>
-                                <div className={styles.markerLine}></div>
+                                <div className={styles.markerDot} />
+                                <div className={styles.markerLine} />
                             </div>
 
                             <div className={styles.timelineContent}>
                                 <div className={styles.yearBadge}>
                                     {achievement.year}
                                 </div>
+
                                 <h3 className={styles.achievementTitle}>
                                     {achievement.title}
                                 </h3>
+
                                 <p className={styles.achievementDescription}>
                                     {achievement.description}
                                 </p>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 

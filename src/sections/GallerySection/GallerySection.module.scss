@@ -52,14 +52,7 @@
     height: 4px;
     background: linear-gradient(90deg, transparent, #fff, transparent);
     margin: 0 auto 20px;
-    opacity: 0;
-    transform: scaleX(0);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
-
-    .visible & {
-        opacity: 1;
-        transform: scaleX(1);
-    }
 }
 
 .sectionSubtitle {
@@ -75,14 +68,7 @@
     flex-wrap: wrap;
     gap: 15px;
     margin-bottom: 60px;
-    opacity: 0;
-    transform: translateY(20px);
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
-
-    .visible & {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .filterBtn {
@@ -142,12 +128,7 @@
 }
 
 .galleryItem {
-    opacity: 0;
     animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-
-    .visible & {
-        animation-play-state: running;
-    }
 }
 
 .itemImage {
@@ -242,16 +223,9 @@
 
 .viewMoreContainer {
     text-align: center;
-    opacity: 0;
-    transform: translateY(20px);
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
     position: relative;
     z-index: 10;
-
-    .visible & {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .viewMoreBtn {

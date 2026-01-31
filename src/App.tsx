@@ -15,10 +15,6 @@ const App: React.FC = () => {
                     <MainContent />
                 </MainLayout>
             )}
-
-            {/* <MainLayout>
-                <MainContent />
-            </MainLayout> */}
         </>
     );
 };

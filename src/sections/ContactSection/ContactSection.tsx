@@ -1,19 +1,22 @@
 import React from "react";
+import { motion } from "framer-motion";
 import styles from "./ContactSection.module.scss";
-import { useSectionObserver } from "../../hooks/useSectionObserver";
 import { APP_CONFIG } from "../../configs/app.config";
+import { staggerContainer, fadeUp } from "../../animations/variants";
 
 const ContactSection: React.FC = () => {
-    const { ref, isVisible } = useSectionObserver({ threshold: 0.2 });
-
     return (
-        <section
-            className={`${styles.contact} ${isVisible ? styles.visible : ""}`}
+        <motion.section
+            className={styles.contact}
             id="contact"
-            ref={ref}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
         >
             <div className={styles.container}>
-                <div className={styles.sectionHeader}>
+                {/* ===== Header ===== */}
+                <motion.div className={styles.sectionHeader} variants={fadeUp}>
                     <h2 className={styles.sectionTitle}>
                         HUBUNGI <span>KAMI</span>
                     </h2>
@@ -21,11 +24,22 @@ const ContactSection: React.FC = () => {
                     <p className={styles.sectionSubtitle}>
                         Mari berkolaborasi dan berkarya bersama
                     </p>
-                </div>
+                </motion.div>
 
-                <div className={styles.contactContent}>
-                    <div className={styles.contactInfo}>
-                        <div className={styles.infoCard}>
+                {/* ===== Content ===== */}
+                <motion.div
+                    className={styles.contactContent}
+                    variants={staggerContainer}
+                >
+                    {/* ===== Info Cards ===== */}
+                    <motion.div
+                        className={styles.contactInfo}
+                        variants={staggerContainer}
+                    >
+                        <motion.div
+                            className={styles.infoCard}
+                            variants={fadeUp}
+                        >
                             <div className={styles.iconWrapper}>
                                 <svg
                                     width="32"
@@ -50,9 +64,12 @@ const ContactSection: React.FC = () => {
                             </div>
                             <h3>Lokasi</h3>
                             <p>{APP_CONFIG.address}</p>
-                        </div>
+                        </motion.div>
 
-                        <div className={styles.infoCard}>
+                        <motion.div
+                            className={styles.infoCard}
+                            variants={fadeUp}
+                        >
                             <div className={styles.iconWrapper}>
                                 <svg
                                     width="32"
@@ -77,9 +94,12 @@ const ContactSection: React.FC = () => {
                             </div>
                             <h3>Email</h3>
                             <p>{APP_CONFIG.email}</p>
-                        </div>
+                        </motion.div>
 
-                        <div className={styles.infoCard}>
+                        <motion.div
+                            className={styles.infoCard}
+                            variants={fadeUp}
+                        >
                             <div className={styles.iconWrapper}>
                                 <svg
                                     width="32"
@@ -98,9 +118,12 @@ const ContactSection: React.FC = () => {
                             </div>
                             <h3>Telepon</h3>
                             <p>{APP_CONFIG.cp}</p>
-                        </div>
+                        </motion.div>
 
-                        <div className={styles.infoCard}>
+                        <motion.div
+                            className={styles.infoCard}
+                            variants={fadeUp}
+                        >
                             <div className={styles.iconWrapper}>
                                 <svg
                                     width="32"
@@ -130,30 +153,46 @@ const ContactSection: React.FC = () => {
                             </div>
                             <h3>Media Sosial</h3>
                             <div className={styles.socialLinks}>
-                                <a href={APP_CONFIG.social.instagram.link} aria-label="Instagram" target="_blank">
+                                <a
+                                    href={APP_CONFIG.social.instagram.link}
+                                    aria-label="Instagram"
+                                    target="_blank"
+                                >
                                     Instagram
                                 </a>
-                                <a href={APP_CONFIG.social.tiktok.link} aria-label="Tiktok" target="_blank">
+                                <a
+                                    href={APP_CONFIG.social.tiktok.link}
+                                    aria-label="Tiktok"
+                                    target="_blank"
+                                >
                                     Tiktok
                                 </a>
-                                <a href={APP_CONFIG.social.youtube.link} aria-label="YouTube" target="_blank">
+                                <a
+                                    href={APP_CONFIG.social.youtube.link}
+                                    aria-label="YouTube"
+                                    target="_blank"
+                                >
                                     YouTube
                                 </a>
                             </div>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
 
-                    <div className={styles.mapContainer}>
+                    {/* ===== Map ===== */}
+                    <motion.div
+                        className={styles.mapContainer}
+                        variants={fadeUp}
+                    >
                         <iframe
                             className={styles.mapPlaceholder}
                             src={APP_CONFIG.gmaps}
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
                         ></iframe>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 

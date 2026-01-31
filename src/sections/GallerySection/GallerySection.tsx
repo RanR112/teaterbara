@@ -1,7 +1,8 @@
 import React from "react";
+import { motion } from "framer-motion";
 import styles from "./GallerySection.module.scss";
 import { useGallery } from "../../hooks/useGallery";
-import { CATEGORIES } from "../../configs/gallery.config";
+import { staggerContainer, fadeUp } from "../../animations/variants";
 
 const GallerySection: React.FC = () => {
     const {
@@ -18,108 +19,190 @@ const GallerySection: React.FC = () => {
         currentPreviewItem,
         handlePrevImage,
         handleNextImage,
+        filterCategories,
+        loading,
+        error,
     } = useGallery();
 
     return (
         <>
-            <section
-                className={`${styles.gallery} ${isVisible ? styles.visible : ""}`}
+            {/* ================= SECTION ================= */}
+            <motion.section
                 id="gallery"
                 ref={sectionRef}
+                className={`${styles.gallery} ${
+                    isVisible ? styles.visible : ""
+                }`}
+                variants={staggerContainer}
+                initial="hidden"
+                animate={isVisible ? "visible" : "hidden"}
             >
                 <div className={styles.container}>
-                    <div className={styles.sectionHeader}>
+                    {/* ================= HEADER ================= */}
+                    <motion.div
+                        className={styles.sectionHeader}
+                        variants={fadeUp}
+                    >
                         <h2 className={styles.sectionTitle}>
                             GALERI <span>KAMI</span>
                         </h2>
-                        <div className={styles.titleUnderline}></div>
+
+                        <div className={styles.titleUnderline} />
+
                         <p className={styles.sectionSubtitle}>
                             Dokumentasi perjalanan dan karya Teater Bara
                         </p>
-                    </div>
+                    </motion.div>
 
-                    <div className={styles.filterButtons}>
-                        {CATEGORIES.map((category) => (
-                            <button
-                                key={category}
-                                className={`${styles.filterBtn} ${
-                                    selectedCategory === category
-                                        ? styles.active
-                                        : ""
-                                }`}
-                                onClick={() => setSelectedCategory(category)}
-                            >
-                                {category}
-                            </button>
-                        ))}
-                    </div>
+                    {/* ================= LOADING ================= */}
+                    {loading && (
+                        <motion.div
+                            className={styles.loadingContainer}
+                            variants={fadeUp}
+                        >
+                            <p>Memuat galeri...</p>
+                        </motion.div>
+                    )}
 
-                    <div className={styles.galleryGrid}>
-                        {displayedItems.map((item, index) => (
-                            <div
-                                key={item.id}
-                                className={styles.galleryItem}
-                                style={{ animationDelay: `${index * 0.1}s` }}
-                            >
-                                <div
-                                    className={styles.itemImage}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        setPreviewImage(item.id);
-                                    }}
+                    {/* ================= ERROR ================= */}
+                    {error && !loading && (
+                        <motion.div
+                            className={styles.errorContainer}
+                            variants={fadeUp}
+                        >
+                            <p>{error}</p>
+                        </motion.div>
+                    )}
+
+                    {/* ================= FILTER BUTTONS ================= */}
+                    {!loading && !error && (
+                        <motion.div
+                            className={styles.filterButtons}
+                            variants={fadeUp}
+                        >
+                            {filterCategories.map((category) => (
+                                <button
+                                    key={category}
+                                    className={`${styles.filterBtn} ${
+                                        selectedCategory === category
+                                            ? styles.active
+                                            : ""
+                                    }`}
+                                    onClick={() =>
+                                        setSelectedCategory(category)
+                                    }
                                 >
-                                    <div className={styles.imagePlaceholder}>
-                                        <img src={item.image} alt={item.alt} />
-                                    </div>
-                                    <div className={styles.itemOverlay}>
-                                        <div className={styles.overlayContent}>
-                                            <h3>{item.title}</h3>
-                                            <span className={styles.category}>
-                                                {item.category}
-                                            </span>
+                                    {category}
+                                </button>
+                            ))}
+                        </motion.div>
+                    )}
+
+                    {/* ================= GRID ================= */}
+                    {!loading && !error && (
+                        <>
+                            <motion.div
+                                className={styles.galleryGrid}
+                                variants={staggerContainer}
+                            >
+                                {displayedItems.map((item) => (
+                                    <motion.div
+                                        key={item.id}
+                                        className={styles.galleryItem}
+                                        variants={fadeUp}
+                                        whileHover={{ scale: 1.03 }}
+                                    >
+                                        <div
+                                            className={styles.itemImage}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                setPreviewImage(item.id);
+                                            }}
+                                        >
+                                            <div
+                                                className={
+                                                    styles.imagePlaceholder
+                                                }
+                                            >
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.alt}
+                                                />
+                                            </div>
+
+                                            <div className={styles.itemOverlay}>
+                                                <div
+                                                    className={
+                                                        styles.overlayContent
+                                                    }
+                                                >
+                                                    <h3>{item.title}</h3>
+                                                    <span
+                                                        className={
+                                                            styles.category
+                                                        }
+                                                    >
+                                                        {item.category}
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                                    </motion.div>
+                                ))}
+                            </motion.div>
 
-                    {filteredItems.length > 8 && (
-                        <div className={styles.viewMoreContainer}>
-                            <button
-                                className={styles.viewMoreBtn}
-                                onClick={() => setShowAll(!showAll)}
-                            >
-                                {showAll
-                                    ? "Tampilkan Lebih Sedikit"
-                                    : "Lihat Selengkapnya"}
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 20 20"
-                                    fill="none"
-                                    style={{
-                                        transform: showAll
-                                            ? "rotate(180deg)"
-                                            : "rotate(0deg)",
-                                        transition: "transform 0.3s ease",
-                                    }}
+                            {/* ================= VIEW MORE ================= */}
+                            {filteredItems.length > 8 && (
+                                <motion.div
+                                    className={styles.viewMoreContainer}
+                                    variants={fadeUp}
                                 >
-                                    <path
-                                        d="M5 10H15M15 10L10 5M15 10L10 15"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
+                                    <button
+                                        className={styles.viewMoreBtn}
+                                        onClick={() => setShowAll(!showAll)}
+                                    >
+                                        {showAll
+                                            ? "Tampilkan Lebih Sedikit"
+                                            : "Lihat Selengkapnya"}
+
+                                        <motion.svg
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 20 20"
+                                            fill="none"
+                                            animate={{
+                                                rotate: showAll ? 180 : 0,
+                                            }}
+                                            transition={{ duration: 0.3 }}
+                                        >
+                                            <path
+                                                d="M5 10H15M15 10L10 5M15 10L10 15"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                        </motion.svg>
+                                    </button>
+                                </motion.div>
+                            )}
+                        </>
+                    )}
+
+                    {/* ================= EMPTY ================= */}
+                    {!loading && !error && displayedItems.length === 0 && (
+                        <motion.div
+                            className={styles.emptyContainer}
+                            variants={fadeUp}
+                        >
+                            <p>Tidak ada gambar untuk kategori ini</p>
+                        </motion.div>
                     )}
                 </div>
-            </section>
+            </motion.section>
 
+            {/* ================= MODAL ================= */}
             {previewImage !== null && currentPreviewItem && (
                 <div
                     className={styles.imagePreview}

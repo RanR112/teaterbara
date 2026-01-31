@@ -6,10 +6,15 @@ Website **Teater Bara** adalah website profil dan galeri yang dibangun menggunak
 
 ## Teknologi yang Digunakan
 
-* **React** (Vite / CRA)
+### Frontend
+* **Vite + React**
 * **TypeScript**
 * **SCSS Module**
-* **Intersection Observer API**
+
+### Backend
+* **Express**
+* **TypeScript**
+* **Google Drive API**
 
 ---
 
@@ -23,7 +28,7 @@ Website **Teater Bara** adalah website profil dan galeri yang dibangun menggunak
 2. **Hero Section**
 
    * Baru muncul setelah VideoIntro selesai
-   * Terintegrasi dengan `useSectionObserver`
+   * Menampilkan bagian utama / awal dari isi website
 
 3. **Section Lainnya**
 
@@ -34,36 +39,11 @@ Website **Teater Bara** adalah website profil dan galeri yang dibangun menggunak
 
 ---
 
-## useSectionObserver
-
-Hook ini digunakan untuk:
-
-* Mendeteksi section yang sedang terlihat di viewport
-* Mengatur animasi masuk section
-* Mengontrol highlight navbar
-
-### Contoh penggunaan:
-
-```tsx
-const { ref, isVisible } = useSectionObserver();
-
-<section ref={ref} className={isVisible ? styles.show : styles.hidden}>
-```
-
----
-
 ## Cara Menjalankan Project
 
 ```bash
 npm install
 npm run dev
-```
-
-Atau jika production build:
-
-```bash
-npm run build
-npm run preview
 ```
 
 ---
