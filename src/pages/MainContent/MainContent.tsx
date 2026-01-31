@@ -3,7 +3,7 @@ import HeroSection from "../../sections/HeroSection/HeroSection";
 import AboutSection from "../../sections/AboutSection/AboutSection";
 import GallerySection from "../../sections/GallerySection/GallerySection";
 import AchievementSection from "../../sections/AchievementSection/AchievementSection";
-import TeamSection from "../../sections/TeamSection/TeamSection";
+// import TeamSection from "../../sections/TeamSection/TeamSection";
 import ContactSection from "../../sections/ContactSection/ContactSection";
 import Aurora from "../../visuals/Aurora/Aurora";
 import styles from "./MainContent.module.scss";
