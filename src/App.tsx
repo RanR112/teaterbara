@@ -9,14 +9,6 @@ const App: React.FC = () => {
 
     return (
         <>
-            {/* {!introDone && <IntroFlow onFinish={() => setIntroDone(true)} />}
-
-            {introDone && (
-                <MainLayout>
-                    <MainContent />
-                </MainLayout>
-            )} */}{" "}
-
             <MainLayout>
                 {" "}
                 <MainContent />{" "}
@@ -24,11 +16,6 @@ const App: React.FC = () => {
             {!introDone && (
                 <IntroFlow onFinish={() => setIntroDone(true)} />
             )}{" "}
-            
-            {/* 
-            <MainLayout>
-                <MainContent />
-            </MainLayout> */}
         </>
     );
 };
