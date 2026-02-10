@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { ChevronDown } from "lucide-react";
 import styles from "./ReadyScreen.module.scss";
 
@@ -37,16 +37,31 @@ const LIGHT_RAYS_CONFIG = {
 const ReadyScreen: React.FC<ReadyScreenProps> = ({ onContinue }) => {
     const particles = useMemo(() => createParticles(), []);
 
+    const handleKeyDown = useCallback(
+        (e: React.KeyboardEvent) => {
+            if (e.key === "Enter" || e.key === " ") {
+                onContinue();
+            }
+        },
+        [onContinue],
+    );
+
     return (
-        <div className={styles.readyScreen}>
-            {/* Floating particles background */}
+        <div
+            className={styles.readyScreen}
+            onClick={onContinue}
+            onKeyDown={handleKeyDown}
+            tabIndex={0}
+            role="button"
+        >
+            {/* Particles */}
             <div className={styles.particlesContainer}>
                 {particles.map((style, i) => (
                     <div key={i} className={styles.particle} style={style} />
                 ))}
             </div>
 
-            {/* Light rays background */}
+            {/* Light rays */}
             <div className={styles.lightBackground}>
                 <div className={styles.radialOverlay} />
                 <LightRays {...LIGHT_RAYS_CONFIG} className="custom-rays" />
@@ -60,13 +75,11 @@ const ReadyScreen: React.FC<ReadyScreenProps> = ({ onContinue }) => {
                     <img src={Logo} alt="Logo" />
                 </div>
 
-                {/* Continue button */}
-                <button className={styles.continueBtn} onClick={onContinue}>
-                    <span className={styles.btnText}>Click to Continue</span>
-                    <div className={styles.iconWrapper}>
-                        <ChevronDown className={styles.chevronIcon} size={24} />
-                    </div>
-                </button>
+                {/* Text only */}
+                <div className={styles.continueText}>
+                    <span>Click Anywhere to Continue</span>
+                    <ChevronDown size={26} className={styles.chevronIcon} />
+                </div>
             </div>
         </div>
     );

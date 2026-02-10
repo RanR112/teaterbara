@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, Suspense, useEffect } from "react";
 import styles from "./IntroFlow.module.scss";
 
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import ReadyScreen from "../ReadyScreen/ReadyScreen";
-import VideoIntro from "../VideoIntro/VideoIntro";
+const VideoIntro = React.lazy(() => import("../VideoIntro/VideoIntro"));
 
 interface IntroFlowProps {
     onFinish: () => void;
@@ -13,6 +13,12 @@ type IntroStep = "loading" | "ready" | "video";
 
 const IntroFlow: React.FC<IntroFlowProps> = ({ onFinish }) => {
     const [step, setStep] = useState<IntroStep>("loading");
+
+    useEffect(() => {
+        if (step === "ready") {
+            import("../VideoIntro/VideoIntro");
+        }
+    }, [step]);
 
     /* =========================
        STEP HANDLERS
@@ -44,7 +50,11 @@ const IntroFlow: React.FC<IntroFlowProps> = ({ onFinish }) => {
                 <ReadyScreen onContinue={handleReadyContinue} />
             )}
 
-            {step === "video" && <VideoIntro onVideoEnd={handleVideoEnd} />}
+            {step === "video" && (
+                <Suspense fallback={null}>
+                    <VideoIntro onVideoEnd={handleVideoEnd} />
+                </Suspense>
+            )}
         </div>
     );
 };

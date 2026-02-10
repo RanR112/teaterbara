@@ -1,0 +1,96 @@
+.cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition:
+        opacity 0.3s ease,
+        transform 0.15s ease;
+
+    svg {
+        display: block;
+        color: #ffffff;
+        filter: drop-shadow(0 0 8px rgba(255, 107, 107, 0.6));
+        transition:
+            transform 0.2s ease,
+            color 0.2s ease;
+    }
+
+    &.visible {
+        opacity: 1;
+    }
+
+    // Cursor untuk state pointer (hover pada elemen clickable)
+    &.cursorPointer {
+        svg {
+            transform: scale(1.3);
+            color: #ffd93d;
+            filter: drop-shadow(0 0 12px rgba(255, 217, 61, 0.8));
+            animation: pulse 0.8s ease-in-out infinite;
+        }
+    }
+}
+
+.cursorFollower {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition:
+        opacity 0.3s ease,
+        width 0.3s ease,
+        height 0.3s ease,
+        border-color 0.3s ease;
+    // Removed left/top transition - using JS animation for smoother following
+
+    &.visible {
+        opacity: 1;
+    }
+
+    // Follower untuk state pointer
+    &.followerPointer {
+        width: 60px;
+        height: 60px;
+        border-color: rgba(255, 217, 61, 0.6);
+        border-width: 3px;
+    }
+}
+
+// Animasi pulse untuk efek spotlight
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1.3);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+}
+
+// Sembunyikan cursor default
+:global(body) {
+    cursor: none;
+
+    :global(*) {
+        cursor: none !important;
+    }
+}
+
+// Media query untuk device dengan touch (tidak perlu custom cursor)
+@media (hover: none) and (pointer: coarse) {
+    .cursor,
+    .cursorFollower {
+        display: none;
+    }
+
+    :global(body),
+    :global(body *) {
+        cursor: auto !important;
+    }
+}
