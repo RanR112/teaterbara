@@ -9,13 +9,18 @@ const App: React.FC = () => {
 
     return (
         <>
-            <MainLayout>
+            {/* <MainLayout>
                 {" "}
                 <MainContent />{" "}
             </MainLayout>{" "}
             {!introDone && (
                 <IntroFlow onFinish={() => setIntroDone(true)} />
-            )}{" "}
+            )}{" "} */}
+            
+            
+            <MainLayout>
+                <MainContent />
+            </MainLayout>
         </>
     );
 };
